@@ -1,1 +1,1 @@
-require "logos/main"
+require "bible/main"
