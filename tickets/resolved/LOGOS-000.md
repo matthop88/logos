@@ -1,4 +1,4 @@
-# BIB-000
+# LOGOS-000
 ## Empty Project
 
 Type: STORY
