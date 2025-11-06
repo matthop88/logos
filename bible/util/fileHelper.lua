@@ -1,4 +1,4 @@
-function findLuaFile(filename, directory)
+function locateLuaFile(filename, directory)
     local directoryItems = love.filesystem.getDirectoryItems(directory)
     for _, v in ipairs(directoryItems) do
         if v == string.lower(filename) .. ".lua" then
