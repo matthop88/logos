@@ -1,3 +1,5 @@
+require("bible/util/consoleFunctions")
+
 function findScriptureFile(filename, directory)
     local directoryItems = love.filesystem.getDirectoryItems(directory)
     for _, v in ipairs(directoryItems) do
@@ -8,11 +10,6 @@ function findScriptureFile(filename, directory)
             if result ~= nil then return result end
         end
     end
-end
-
-function printResponse(category, message)
-    message = message or ""
-    print("\n[" .. category .. "] " .. message .. "\n")
 end
 
 if __BOOK_NAME == nil then
