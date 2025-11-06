@@ -10,6 +10,20 @@ function findScriptureFile(filename, directory)
     end
 end
 
-local scripturePath = findScriptureFile("philippians", "bible/scriptures")
-print(scripturePath)
+function printResponse(category, message)
+    message = message or ""
+    print("\n[" .. category .. "] " .. message .. "\n")
+end
+
+if __BOOK_NAME == nil then
+    printResponse("ERROR", "Please specify a book of the Bible.")
+else
+    local scripturePath = findScriptureFile(__BOOK_NAME, "bible/scriptures")
+    if scripturePath ~= nil then
+        printResponse("OK")
+    else
+        printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
+    end
+end
+
 love.event.quit()
