@@ -10,8 +10,6 @@ function findScriptureFile(filename, directory)
     end
 end
 
-print("Welcome to Logos!")
-
 local scripturePath = findScriptureFile("philippians", "bible/scriptures")
 print(scripturePath)
 love.event.quit()
