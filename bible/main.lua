@@ -1,5 +1,6 @@
 require("bible/util/consoleFunctions")
-require("bible/util/fileHelper")
+
+local PASSAGE_FINDER = require("bible/passageFinder")
 
 local findChapter = function(scriptureData, chapterNum)
 	for _, c in ipairs(scriptureData.chapters) do
@@ -10,24 +11,20 @@ local findChapter = function(scriptureData, chapterNum)
 end
 
 if __BOOK_NAME == nil then
-    printResponse("ERROR", "Please specify a book of the Bible.")
+	printResponse("ERROR", "Please specify a book of the Bible.")
 else
-    local scripturePath = locateLuaFile(__BOOK_NAME, "bible/scriptures")
-    if scripturePath ~= nil then
-    	local scriptureData = require(scripturePath)
-
-    	if __PASSAGE_INFO == nil then
-        	printResponse("OK")
-        else
-        	local chapterNum = tonumber(__PASSAGE_INFO)
-        	if findChapter(scriptureData, chapterNum) then
-        		printResponse("OK")
-        	else
-        		printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. chapterNum)
-        	end
-        end
+	local bookData = PASSAGE_FINDER:findPassage(__BOOK_NAME, __PASSAGE_INFO)
+	if bookData == nil then
+		printResponse("ERROR", "Book not found " .. __BOOK_NAME)
+	elseif __PASSAGE_INFO == nil then
+        printResponse("OK")
     else
-        printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
+        local chapterNum = tonumber(__PASSAGE_INFO)
+        if not findChapter(scriptureData, chapterNum) then
+        	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. chapterNum)
+        else
+        	printResponse("OK")
+        end
     end
 end
 
