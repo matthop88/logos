@@ -15,12 +15,12 @@ if __BOOK_NAME == nil then
 else
 	local bookData = PASSAGE_FINDER:findPassage(__BOOK_NAME, __PASSAGE_INFO)
 	if bookData == nil then
-		printResponse("ERROR", "Book not found " .. __BOOK_NAME)
+		printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
 	elseif __PASSAGE_INFO == nil then
         printResponse("OK")
     else
         local chapterNum = tonumber(__PASSAGE_INFO)
-        if not findChapter(scriptureData, chapterNum) then
+        if not findChapter(bookData, chapterNum) then
         	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. chapterNum)
         else
         	printResponse("OK")
