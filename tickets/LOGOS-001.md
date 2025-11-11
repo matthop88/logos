@@ -70,7 +70,7 @@ The same response happens when prompting with
 
 ### Acceptance Criteria:
 - [X] Can use the love . Philippians       prompt. Responds "[OK]". If specifying another book, throws error
-- [ ] Can use the love . Philippians 1     prompt. Responds "[OK]". If specifying another chapter, throws error
+- [X] Can use the love . Philippians 1     prompt. Responds "[OK]". If specifying another chapter, throws error
 - [ ] Can use the love . Philippians 1:1-6 prompt. Responds "[OK]". If specifying verses out of range, throws error
 - [ ] Display caption to screen.
 - [ ] Display chosen verses to screen.
