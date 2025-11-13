@@ -1,6 +1,13 @@
 require("bible/util/consoleFunctions")
+require("bible/util/referenceParser")
 
 local PASSAGE_FINDER = require("bible/passageFinder")
+
+local passageInfo
+
+if __PASSAGE_INFO then
+	passageInfo = parseReference(__PASSAGE_INFO)
+end
 
 local findChapter = function(scriptureData, chapterNum)
 	for _, c in ipairs(scriptureData.chapters) do
