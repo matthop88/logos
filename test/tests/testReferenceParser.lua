@@ -33,6 +33,15 @@ return {
                                     and results.finish.verse   == nil)
     end,
 
+    testSingleVerse = function(self)
+        local name = "1:1     => { start = { chapter = 1, verse = 1 } }"
+
+        local results = parseReference("1:1")
+        return TESTING:assertTrue(name, results.start.chapter == 1
+                                    and results.start.verse   == 1
+                                    and results.finish        == nil)
+    end,
+
     testVerseRange = function(self)
         local name = "1:1-3   => { start = { chapter = 1, verse = 1 }, finish = { chapter = 1, verse = 3 } }"
 
