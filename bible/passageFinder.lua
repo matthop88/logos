@@ -45,13 +45,35 @@ return {
 			return nil
 		else
 			local result = {
-				book = passageInfo.book
+				book    = passageInfo.book,
+				verses  = {},
+				missing = {},
 			}
 
 			if passageInfo.start then
 				local chapter = self:findChapter(passageInfo.start.chapter, scriptures)
 				if chapter == nil then
 					result.missing = { chapter = passageInfo.start.chapter }
+				elseif passageInfo.start.verse then
+					local startVerse = passageInfo.start.verse
+					local endVerse   = startVerse
+					if passageInfo.finish and passageInfo.finish.verse then
+						endVerse = passageInfo.finish.verse
+					end
+					for v = startVerse, endVerse do
+						local verse = self:findVerse(v, chapter)
+						if verse == nil then
+							table.insert(result.missing, { chapter = passageInfo.start.chapter, verse = v })
+						else
+							local lines = {}
+							for _, line in ipairs(verse) do
+								table.insert(lines, line)
+							end
+							lines.chapter = passageInfo.start.chapter
+							lines.verse   = v
+							table.insert(result.verses, lines)
+						end
+					end
 				end
 			end
 
@@ -70,6 +92,14 @@ return {
 		for _, c in ipairs(scriptures.chapters) do
 			if c.chapter == chapter then
 				return c
+			end
+		end
+	end,
+
+	findVerse = function(self, verse, chapterData)
+		for _, v in ipairs(chapterData.verses) do
+			if v.verse == verse then
+				return v
 			end
 		end
 	end,
