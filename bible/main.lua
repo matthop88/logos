@@ -3,35 +3,23 @@ require("bible/util/referenceParser")
 
 local PASSAGE_FINDER = require("bible/passageFinder")
 
-local passageInfo
+local passageInfo = {}
 
 if __PASSAGE_INFO then
 	passageInfo = parseReference(__PASSAGE_INFO)
 end
 
-local findChapter = function(scriptureData, chapterNum)
-	for _, c in ipairs(scriptureData.chapters) do
-		if c.chapter == chapterNum then
-			return c
-		end
-	end
-end
-
 if __BOOK_NAME == nil then
 	printResponse("ERROR", "Please specify a book of the Bible.")
 else
-	local response = PASSAGE_FINDER:findPassage(__BOOK_NAME, __PASSAGE_INFO)
-	if not response.bookFound then
-		printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
-	elseif __PASSAGE_INFO == nil then
-        printResponse("OK")
+	passageInfo.book = __BOOK_NAME
+
+	local response = PASSAGE_FINDER:findPassage(passageInfo)
+	if     not response          then printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
+	elseif __PASSAGE_INFO == nil then printResponse("OK")
+    elseif not response.missing  then printResponse("OK")
     else
-        local chapterNum = tonumber(__PASSAGE_INFO)
-        if not findChapter(response.bookFound, chapterNum) then
-        	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. chapterNum)
-        else
-        	printResponse("OK")
-        end
+		printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. response.missing.chapter)
     end
 end
 
