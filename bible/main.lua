@@ -17,16 +17,16 @@ else
 
 	local response = PASSAGE_FINDER:findPassage(passageInfo)
 	if not response then
-		printResponse("ERROR", "Book not found: " .. __BOOK_NAME)
+		printResponse("ERROR", "Book not found: " .. capitalizeBookName(__BOOK_NAME))
 	elseif __PASSAGE_INFO == nil then
-        printResponse("OK")
+        print(capitalizeBookName(__BOOK_NAME))
     elseif response.missing.chapter then
-    	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. response.missing.chapter)
+    	printResponse("ERROR", "Chapter not found: " .. capitalizeBookName(__BOOK_NAME) .. " " .. response.missing.chapter)
     elseif #response.missing > 0 then
     	local missingVersesSummary = summarizeReference(__BOOK_NAME, response.missing)
     	printResponse("ERROR", "Verse not found: " .. missingVersesSummary)
     else
-    	printResponse("OK")
+    	print(summarizeReference(__BOOK_NAME, response.verses))
     end
 end
 
