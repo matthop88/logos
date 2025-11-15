@@ -74,7 +74,7 @@ The same response happens when prompting with
 - [X] Can use the love . Philippians 1:1-6 prompt. Responds "[OK]". If specifying verses out of range, throws error
 - [X] Display caption to screen.
 - [X] Display chosen verses to screen.
-- [ ] Preface with verse numbers.
+- [X] Preface with verse numbers.
 
 **Story Points**: 2 <br/>
 **Resolution**: UNRESOLVED <br/>
