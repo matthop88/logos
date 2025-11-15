@@ -13,4 +13,8 @@ return {
         table.insert(result, string.sub(inputString, lastPos))
         return result
     end,
+
+    capitalize = function(self, str)
+        return string.upper(string.sub(str, 1, 1)) .. string.sub(str, 2)
+    end,
 }
