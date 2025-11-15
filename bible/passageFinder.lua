@@ -36,22 +36,6 @@ If the book isn't found, returns nil.
 
 ]]
 
-local appendMissing = function(missingRecords, chapterNum, verseNum)
-	if #missingRecords == 0 then
-		table.insert(missingRecords, { chapter = chapterNum, verse = verseNum, endVerse = verseNum })
-	else
-		local lastRecord = missingRecords[#missingRecords]
-		local lastChapterNum = lastRecord.chapter
-		local lastVerseNum   = lastRecord.endVerse
-
-		if chapterNum == lastChapterNum and verseNum == lastVerseNum + 1 then
-			lastRecord.endVerse = verseNum
-		else
-			table.insert(missingRecords, { chapter = chapterNum, verse = verseNum, endVerse = verseNum })
-		end
-	end
-end
-
 return {
 	findPassage = function(self, passageInfo)
 		local bookData = require("bible/book"):create(passageInfo.book)
@@ -77,7 +61,7 @@ return {
 					for v = startVerse, endVerse do
 						local verse = chapter:findVerse(v)
 						if verse == nil then
-							appendMissing(result.missing, passageInfo.start.chapter, v)
+							table.insert(result.missing, { chapter = passageInfo.start.chapter, verse = v })
 						else
 							local lines = {}
 							for _, line in ipairs(verse) do
