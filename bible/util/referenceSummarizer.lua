@@ -29,5 +29,6 @@ summarizeReference = function(bookName, verses)
 		end
 	end
 
-	return STRING_UTIL:capitalize(bookName) .. " " .. refString
+	if refString == "" then return STRING_UTIL:capitalize(bookName)
+	else                    return STRING_UTIL:capitalize(bookName) .. " " .. refString end
 end
