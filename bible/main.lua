@@ -22,7 +22,12 @@ else
     elseif response.missing.chapter then
     	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. response.missing.chapter)
     elseif #response.missing > 0 then
-    	printResponse("ERROR", "Verse not found: " .. __BOOK_NAME .. " " .. response.missing[1].chapter .. ":" .. response.missing[1].verse)
+    	local missingVerses = response.missing[1]
+    	if missingVerses.endVerse == missingVerses.verse then
+    		printResponse("ERROR", "Verse not found: " .. __BOOK_NAME .. " " .. missingVerses.chapter .. ":" .. missingVerses.verse)
+    	else
+    		printResponse("ERROR", "Verses not found: " .. __BOOK_NAME .. " " .. missingVerses.chapter .. ":" .. missingVerses.verse .. "-" .. missingVerses.endVerse)
+    	end
     else
     	printResponse("OK")
     end
