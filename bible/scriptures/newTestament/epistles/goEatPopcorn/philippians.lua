@@ -1,5 +1,6 @@
 return {
     book     = "Philippians",
+    version  = "NASB 95",
     chapters = {
         {   chapter = 1,
             verses = {
