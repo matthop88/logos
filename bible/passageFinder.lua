@@ -61,6 +61,7 @@ return {
 				book    = passageInfo.book,
 				verses  = {},
 				missing = {},
+				version = bookData:getVersion(),
 			}
 
 			if passageInfo.start then
