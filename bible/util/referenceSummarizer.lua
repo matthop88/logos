@@ -1,6 +1,4 @@
-local capitalizeBookName = function(bookName)
-	return string.upper(string.sub(bookName, 1, 1)) .. string.sub(bookName, 2)
-end
+local STRING_UTIL = require("bible/util/stringUtil")
 
 summarizeReference = function(bookName, verses)
 	local refString = ""
@@ -31,5 +29,5 @@ summarizeReference = function(bookName, verses)
 		end
 	end
 
-	return capitalizeBookName(bookName) .. " " .. refString
+	return STRING_UTIL:capitalize(bookName) .. " " .. refString
 end
