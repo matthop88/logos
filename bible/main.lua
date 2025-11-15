@@ -10,8 +10,10 @@ local displayVerses = function(verses)
 	print(caption)
 	print()
 	for _, v in ipairs(verses) do
-		for _, line in ipairs(v) do
-			print(line)
+		local verseNumber = v.verse
+		for n, line in ipairs(v) do
+			if n == 1 then print(verseNumber .. "  " .. line)
+			else           print(        " " .. "  " .. line)  end
 		end
 	end
 	print()
