@@ -23,6 +23,10 @@ return {
     				return self.data.book
     			end,
 
+    			getVersion = function(self)
+    				return self.data.version
+    			end,
+
     			findChapter = function(self, chapterNumber, scriptures)
 					for _, c in ipairs(self.data.chapters) do
 						if c.chapter == chapterNumber then
