@@ -1,5 +1,6 @@
 require("bible/util/consoleFunctions")
 require("bible/util/referenceParser")
+require("bible/util/referenceSummarizer")
 
 local PASSAGE_FINDER = require("bible/passageFinder")
 
@@ -22,12 +23,8 @@ else
     elseif response.missing.chapter then
     	printResponse("ERROR", "Chapter not found: " .. __BOOK_NAME .. " " .. response.missing.chapter)
     elseif #response.missing > 0 then
-    	local missingVerses = response.missing[1]
-    	if missingVerses.endVerse == missingVerses.verse then
-    		printResponse("ERROR", "Verse not found: " .. __BOOK_NAME .. " " .. missingVerses.chapter .. ":" .. missingVerses.verse)
-    	else
-    		printResponse("ERROR", "Verses not found: " .. __BOOK_NAME .. " " .. missingVerses.chapter .. ":" .. missingVerses.verse .. "-" .. missingVerses.endVerse)
-    	end
+    	local missingVersesSummary = summarizeReference(__BOOK_NAME, response.missing)
+    	printResponse("ERROR", "Verse not found: " .. missingVersesSummary)
     else
     	printResponse("OK")
     end
