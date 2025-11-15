@@ -17,4 +17,8 @@ return {
     capitalize = function(self, str)
         return string.upper(string.sub(str, 1, 1)) .. string.sub(str, 2)
     end,
+
+    caption = function(self, str)
+        return "\n" .. str .. "\n" .. string.rep("-", string.len(str))
+    end,
 }
