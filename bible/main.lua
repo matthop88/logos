@@ -5,8 +5,12 @@ local STRING_UTIL = require("bible/util/stringUtil")
 
 local PASSAGE_FINDER = require("bible/passageFinder")
 
-local displayVerses = function(verses)
-	local caption = STRING_UTIL:caption(summarizeReference(__BOOK_NAME, verses))
+local displayVerses = function(verses, version)
+	local referenceSummary = summarizeReference(__BOOK_NAME, verses)
+	if version ~= nil then
+		referenceSummary = referenceSummary .. " (" .. version .. ")"
+	end
+	local caption = STRING_UTIL:caption(referenceSummary)
 	print(caption)
 	print()
 	for _, v in ipairs(verses) do
@@ -39,7 +43,7 @@ else
     	local missingVersesSummary = summarizeReference(__BOOK_NAME, response.missing)
     	printResponse("ERROR", "Verse not found: " .. missingVersesSummary)
     else
-    	displayVerses(response.verses)
+    	displayVerses(response.verses, response.version)
     end
 end
 
