@@ -19,7 +19,7 @@ else
 	if not response then
 		printResponse("ERROR", "Book not found: " .. capitalizeBookName(__BOOK_NAME))
 	elseif __PASSAGE_INFO == nil then
-        print(capitalizeBookName(__BOOK_NAME))
+        print(summarizeReference(__BOOK_NAME))
     elseif response.missing.chapter then
     	printResponse("ERROR", "Chapter not found: " .. capitalizeBookName(__BOOK_NAME) .. " " .. response.missing.chapter)
     elseif #response.missing > 0 then
