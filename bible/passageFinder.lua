@@ -1,5 +1,3 @@
-require("bible/util/fileHelper")
-
 --[[
 
 New architecture:
@@ -40,8 +38,8 @@ If the book isn't found, returns nil.
 
 return {
 	findPassage = function(self, passageInfo)
-		local scriptures = self:loadBook(passageInfo.book)
-		if scriptures == nil then
+		local bookData = require("bible/book"):create(passageInfo.book)
+		if bookData == nil then
 			return nil
 		else
 			local result = {
@@ -51,7 +49,7 @@ return {
 			}
 
 			if passageInfo.start then
-				local chapter = self:findChapter(passageInfo.start.chapter, scriptures)
+				local chapter = bookData:findChapter(passageInfo.start.chapter)
 				if chapter == nil then
 					result.missing = { chapter = passageInfo.start.chapter }
 				elseif passageInfo.start.verse then
@@ -61,7 +59,7 @@ return {
 						endVerse = passageInfo.finish.verse
 					end
 					for v = startVerse, endVerse do
-						local verse = self:findVerse(v, chapter)
+						local verse = chapter:findVerse(v)
 						if verse == nil then
 							table.insert(result.missing, { chapter = passageInfo.start.chapter, verse = v })
 						else
@@ -78,29 +76,6 @@ return {
 			end
 
 			return result
-		end
-	end,
-
-	loadBook = function(self, bookName)
-		local scripturePath = locateLuaFile(bookName, "bible/scriptures")
-    	if scripturePath ~= nil then
-    		return require(scripturePath)
-    	end
-	end,
-
-	findChapter = function(self, chapter, scriptures)
-		for _, c in ipairs(scriptures.chapters) do
-			if c.chapter == chapter then
-				return c
-			end
-		end
-	end,
-
-	findVerse = function(self, verse, chapterData)
-		for _, v in ipairs(chapterData.verses) do
-			if v.verse == verse then
-				return v
-			end
 		end
 	end,
 }
