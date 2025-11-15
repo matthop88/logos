@@ -1,3 +1,7 @@
+capitalizeBookName = function(bookName)
+	return string.upper(string.sub(bookName, 1, 1)) .. string.sub(bookName, 2)
+end
+
 summarizeReference = function(bookName, verses)
 	local ranges = {}
 	for _, v in ipairs(verses) do
@@ -21,5 +25,5 @@ summarizeReference = function(bookName, verses)
 		end
 	end
 
-	return bookName .. " " .. refString
+	return capitalizeBookName(bookName) .. " " .. refString
 end
