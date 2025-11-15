@@ -36,6 +36,21 @@ If the book isn't found, returns nil.
 
 ]]
 
+local processVerse = function(chapterData, verseNumber, result)
+	local verse = chapterData:findVerse(verseNumber)
+	if verse == nil then
+		table.insert(result.missing, { chapter = chapterData.chapter, verse = verseNumber })
+	else
+		local lines = {}
+		for _, line in ipairs(verse) do
+			table.insert(lines, line)
+		end
+		lines.chapter = chapterData.chapter
+		lines.verse   = verseNumber
+		table.insert(result.verses, lines)
+	end
+end
+
 return {
 	findPassage = function(self, passageInfo)
 		local bookData = require("bible/book"):create(passageInfo.book)
@@ -59,18 +74,11 @@ return {
 						endVerse = passageInfo.finish.verse
 					end
 					for v = startVerse, endVerse do
-						local verse = chapter:findVerse(v)
-						if verse == nil then
-							table.insert(result.missing, { chapter = passageInfo.start.chapter, verse = v })
-						else
-							local lines = {}
-							for _, line in ipairs(verse) do
-								table.insert(lines, line)
-							end
-							lines.chapter = passageInfo.start.chapter
-							lines.verse   = v
-							table.insert(result.verses, lines)
-						end
+						processVerse(chapter, v, result)
+					end
+				else
+					for _, v in ipairs(chapter.verses) do
+						processVerse(chapter, v.verse, result)
 					end
 				end
 			end
