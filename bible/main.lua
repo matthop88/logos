@@ -16,8 +16,12 @@ local displayVerses = function(verses, version)
 	for _, v in ipairs(verses) do
 		local verseNumber = v.verse
 		for n, line in ipairs(v) do
-			if n == 1 then print(verseNumber .. "  " .. line)
-			else           print(        " " .. "  " .. line)  end
+			local spacer = "   "
+			if verseNumber > 9 then
+				spacer = "  "
+			end
+			if n == 1 then print(verseNumber .. spacer .. line)
+			else           print(        " " .. "   "  .. line)  end
 		end
 	end
 	print()
