@@ -82,6 +82,13 @@ return {
 						processVerse(chapter, v.verse, result)
 					end
 				end
+			else
+				for _, c in ipairs(bookData.data.chapters) do
+					local chapter = bookData:findChapter(c.chapter)
+					for _, v in ipairs(chapter.verses) do
+						processVerse(chapter, v.verse, result)
+					end
+				end
 			end
 
 			return result
