@@ -1,17 +1,7 @@
+require "commandLineParser"
+
 local parseArgs = function(args)
-	local consumingSize = false
-	for _, arg in ipairs(args) do
-		if arg == "--wordSize" or arg == "-z" then
-			consumingSize = true
-		elseif consumingSize then
-			__WORD_SIZE = tonumber(arg)
-			consumingSize = false
-		elseif __BOOK_NAME == nil then
-			__BOOK_NAME = arg
-		elseif __PASSAGE_INFO == nil then
-			__PASSAGE_INFO = arg
-		end
-	end
+	parseCommandLine(args, require("bible/cmdSchema"))
 
 end
 
