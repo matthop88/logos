@@ -1,8 +1,7 @@
-require "commandLineParser"
+local COMMAND_LINE_PARSER = require "commandLineParser"
 
 local parseArgs = function(args)
-	parseCommandLine(args, require("bible/cmdSchema"))
-
+	COMMAND_LINE_PARSER:parseCommandLine(args, require("bible/cmdSchema"))
 end
 
 function love.load(args)
