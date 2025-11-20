@@ -21,4 +21,8 @@ return {
     caption = function(self, str)
         return "\n" .. str .. "\n" .. string.rep("-", string.len(str))
     end,
+
+    startsWith = function(self, str, header)
+        return string.sub(str, 1, #header) == header
+    end,
 }
