@@ -1,9 +1,12 @@
 require("bible/util/consoleFunctions")
 require("bible/util/referenceParser")
 require("bible/util/referenceSummarizer")
+local FILTER      = require("bible/util/filter")
 local STRING_UTIL = require("bible/util/stringUtil")
 
 local PASSAGE_FINDER = require("bible/passageFinder")
+
+local minLetterFilter = __PARAMS.wordSize
 
 local displayVerses = function(verses, version)
 	local referenceSummary = summarizeReference(__BOOK_NAME, verses)
@@ -20,8 +23,10 @@ local displayVerses = function(verses, version)
 			if verseNumber > 9 then
 				spacer = "  "
 			end
-			if n == 1 then print(verseNumber .. spacer .. line)
-			else           print(        " " .. "   "  .. line)  end
+			local alteredLine = line
+			if minLetterFilter ~= nil then alteredLine = FILTER:filterMinLetters(line, tonumber(minLetterFilter)) end
+			if n == 1 then print(verseNumber .. spacer .. alteredLine)
+			else           print(        " " .. "   "  .. alteredLine)  end
 		end
 	end
 	print()
