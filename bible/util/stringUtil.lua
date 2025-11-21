@@ -14,6 +14,16 @@ return {
         return result
     end,
 
+    join = function(self, elements, delimiter)
+        delimiter = delimiter or " "
+        local joinedString = nil
+        for _, e in ipairs(elements) do
+            if joinedString == nil then joinedString = e
+            else                        joinedString = joinedString .. delimiter .. e end
+        end
+        return joinedString
+    end,
+
     capitalize = function(self, str)
         return string.upper(string.sub(str, 1, 1)) .. string.sub(str, 2)
     end,
