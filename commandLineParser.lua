@@ -14,12 +14,13 @@ return {
 
 	parseBookAndPassageInfo = function(self, args)
 		__BOOK_NAME = args[1]
-		if not STRING_UTIL:startsWith(args[2], "-") then
+		if args[2] and not STRING_UTIL:startsWith(args[2], "-") then
 			__PASSAGE_INFO = args[2]
 		end
 	end,
 
 	parseCommandLine = function(self, args, schema)
+		__BOOK_NAME, __PASSAGE_INFO = nil, nil
 		self:parseBookAndPassageInfo(args)
 		self:parseCommandLineIntern(args, schema)
 	end,
@@ -27,7 +28,7 @@ return {
 	parseCommandLineIntern = function(self, args, schema)
 		local expectingValueFor = nil
 		__PARAMS = {}
-		for n, arg in ipairs(args) do
+		for _, arg in ipairs(args) do
 			local schemaCommand = self:getSchemaCommand(arg, schema)
 			if     schemaCommand ~= nil then __PARAMS[schemaCommand]     = true
 			elseif expectingValueFor    then __PARAMS[expectingValueFor] = arg  end
