@@ -26,8 +26,8 @@ Note: this isn't a minimum word size filter, but more like a filter which blocks
 words of length z or less.
 
 ### Acceptance Criteria:
-- [ ] Command-line parser which allows parsing of word size.
-- [ ] Unit testing of command-line parser.
+- [X] Command-line parser which allows parsing of word size.
+- [X] Unit testing of command-line parser.
 - [ ] Filtering utility
 - [ ] Unit testing of filtering utility
 - [ ] Full integration
