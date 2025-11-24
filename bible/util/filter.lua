@@ -10,6 +10,15 @@ local replaceWithDashes = function(str)
     return newStr
 end
 
+lengthWithoutPunctuation = function(str)
+	local length = 0
+	for i = 1, string.len(str) do
+		local myChar = string.sub(str, i, i)
+		if not STRING_UTIL:isPunctuation(myChar) then length = length + 1 end
+	end
+	return length
+end
+
 return {
 	__MIN_LETTER_FILTER = {
 		filterMinLetters = function(self, phrase, minLetters)
@@ -26,8 +35,8 @@ return {
 	    end,
 
 	    transform = function(self, token, minLetters)
-	    	if string.len(token) <= minLetters then return replaceWithDashes(token)
-	    	else                                           return token         end
+	    	if lengthWithoutPunctuation(token) <= minLetters then return replaceWithDashes(token)
+	    	else                                                  return token                end
 	    end,
 
 	    assemble = function(self, tokens)
