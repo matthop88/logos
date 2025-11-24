@@ -3,7 +3,9 @@ local STRING_UTIL = require("bible/util/stringUtil")
 local replaceWithDashes = function(str)
     local newStr = ""
     for i = 1, string.len(str) do
-    	newStr = newStr .. "-"
+    	local myChar = string.sub(str, i, i)
+        if STRING_UTIL:isPunctuation(myChar) then newStr = newStr .. myChar
+        else                                      newStr = newStr .. "-"   end 
     end
     return newStr
 end
