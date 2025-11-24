@@ -35,4 +35,8 @@ return {
     startsWith = function(self, str, header)
         return string.sub(str, 1, #header) == header
     end,
+
+    isPunctuation = function(self, char)
+        return char == "." or char == "," or char == "-" or char == "!" or char == "?" or char == "'" or char == "\"" or char == ";" or char == ":" or char == "(" or char == ")"
+    end,
 }
