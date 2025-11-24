@@ -28,7 +28,7 @@ words of length z or less.
 ### Acceptance Criteria:
 - [X] Command-line parser which allows parsing of word size.
 - [X] Unit testing of command-line parser.
-- [ ] Filtering utility
+- [X] Filtering utility
 - [ ] Unit testing of filtering utility
 - [ ] Full integration
 
