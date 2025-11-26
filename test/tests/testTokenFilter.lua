@@ -17,11 +17,22 @@ return {
     testEmptyCode = function(self)
         local name = "Empty Code Test"
 
-        local token = "Watow!"
-        local code  = "******"
+        local token = "Blessed"
+        local code  = "*******"
 
         local results = TOKEN_FILTER:filter(token, code)
 
-        return TESTING:assertEquals(name, "Watow!", results)
+        return TESTING:assertEquals(name, "Blessed", results)
+    end,
+
+    testFullFilterCode = function(self)
+        local name = "Full Code Test"
+
+        local token = "foundation"
+        local code  = "----------"
+
+        local results = TOKEN_FILTER:filter(token, code)
+
+        return TESTING:assertEquals(name, "----------", results)
     end,
 }
