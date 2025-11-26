@@ -17,12 +17,12 @@ return {
     testEmptyCode = function(self)
         local name = "Empty Code Test"
 
-        local token = "Blessed"
-        local code  = "*******"
+        local token = "blessing"
+        local code  = "********"
 
         local results = TOKEN_FILTER:filter(token, code)
 
-        return TESTING:assertEquals(name, "Blessed", results)
+        return TESTING:assertEquals(name, "blessing", results)
     end,
 
     testFullFilterCode = function(self)
@@ -34,5 +34,27 @@ return {
         local results = TOKEN_FILTER:filter(token, code)
 
         return TESTING:assertEquals(name, "----------", results)
+    end,
+
+    testCapitalizationCode = function(self)
+        local name = "Capitalization Code Test"
+
+        local token = "Ephesians"
+        local code  = "*--------"
+
+        local results = TOKEN_FILTER:filter(token, code)
+
+        return TESTING:assertEquals(name, "E--------", results)
+    end,
+
+    testPunctuationCode = function(self)
+        local name = "Punctuation Code Test"
+
+        local token = "world,"
+        local code  = "-----*"
+
+        local results = TOKEN_FILTER:filter(token, code)
+
+        return TESTING:assertEquals(name, "-----,", results)
     end,
 }
