@@ -26,17 +26,17 @@ Note: this isn't a minimum word size filter, but more like a filter which blocks
 words of length z or less.
 
 ### Acceptance Criteria:
-- [ ] Command-line parser which allows parsing of word size.
-- [ ] Unit testing of command-line parser.
-- [ ] Filtering utility
-- [ ] Unit testing of filtering utility
-- [ ] Full integration
+- [X] Command-line parser which allows parsing of word size.
+- [X] Unit testing of command-line parser.
+- [X] Filtering utility
+- [X] Unit testing of filtering utility
+- [X] Full integration
 
 **Story Points**: 2 <br/>
-**Resolution**: UNRESOLVED <br/>
-**Sprint**: FY25 Q4 Sprint 4 <br/>
+**Resolution**: RESOLVED <br/>
+**Sprint**: FY25 Q4 Sprint 5 <br/>
 
 **Dates**: <br/>
 **Created**: 11/17/25 1:03 pm <br/>
-**Completed**: --/--/-- --:-- -m <br/>
+**Completed**: 12/02/25 09:57 am <br/>
 
