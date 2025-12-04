@@ -42,7 +42,7 @@ LOGOS responds with the oldest verse learned (Philippians 1:1-3 -z 4)
 LOGOS responds with the next oldest verse learned (Colossians 1:1-3 -z 2)
 
 ### Acceptance Criteria:
-- [ ] New memory program, triggered by love . MEM on command line
+- [X] New memory program, triggered by love . MEM on command line
 - [ ] MEM SAVE remembers a verse with proper filtering (and timestamp)
 - [ ] MEM RECALL command shows memorized verse with oldest timestamp, refreshes timestamp
 - [ ] MEM SAVE updates verse filters
