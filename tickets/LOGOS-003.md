@@ -9,7 +9,7 @@ MEM will remember any and all verses the user tells it to memorize
 
 Example:
 
-    love . MEM SAVE Philippians 1:1-3 -z 3
+    love . MEM STORE Philippians 1:1-3 -z 3
 
 LOGOS remembers that Philippians 1:1-3 -z 3 is important.
 
@@ -17,7 +17,7 @@ LOGOS remembers that Philippians 1:1-3 -z 3 is important.
 
 LOVE responds with Philippians 1:1-3 -z 3
 
-    love . MEM SAVE Philippians 1:1-3 -z 4
+    love . MEM STORE Philippians 1:1-3 -z 4
 
 LOGOS replaces its internal memory with the new verse.
 
@@ -29,7 +29,7 @@ LOGOS responds with Philippians 1:1-3 -z 4
 
 LOGOS responds with Philippians 1:1-2 -z 4
 
-    love . MEM SAVE Colossians 1:1-3 -z 2
+    love . MEM STORE Colossians 1:1-3 -z 2
 
 LOGOS remembers that Colossians 1:1-3 -z 2 is important
 
@@ -42,10 +42,10 @@ LOGOS responds with the oldest verse learned (Philippians 1:1-3 -z 4)
 LOGOS responds with the next oldest verse learned (Colossians 1:1-3 -z 2)
 
 ### Acceptance Criteria:
-- [X] New memory program, triggered by love . MEM on command line
-- [ ] MEM SAVE remembers a verse with proper filtering (and timestamp)
+- [ ] New memory program, triggered by love . MEM on command line
+- [ ] MEM STORE remembers a verse with proper filtering (and timestamp)
 - [ ] MEM RECALL command shows memorized verse with oldest timestamp, refreshes timestamp
-- [ ] MEM SAVE updates verse filters
+- [ ] MEM STORE updates verse filters
 - [ ] MEM RECALL can specifically recall verses
 - [ ] MEM RECALL works on subsets of memorized verses
 
