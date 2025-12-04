@@ -5,8 +5,8 @@ local parseArgs = function(args)
 end
 
 function love.load(args)
-    if args[1] == "TEST" then
-        require("test/framework")
+    if     args[1] == "TEST" then require("test/framework")
+    elseif args[1] == "MEM"  then require("toolbox/memory/memoryApp")
     else
         parseArgs(args)
         require "bible/main"
