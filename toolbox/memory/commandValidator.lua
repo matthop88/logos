@@ -9,7 +9,7 @@ return {
 
 	validate = function(self, command)
 		for _, cmd in ipairs(self.vocab) do
-			if string.upper(command) == cmd then return RESULT:success() end
+			if string.upper(command) == cmd then return RESULT:success({ fn = nil }) end
 		end
 
 		return self:getBadCommandError(command)
