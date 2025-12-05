@@ -11,7 +11,7 @@ return {
 		local validationResult = self:validateCommandWord(command)
 		if     validationResult:isError()           then return validationResult
 		elseif command == "STORE" and filter == nil then return RESULT:error("No filter specified!")
-		else                                             return RESULT:success()                end
+		else                                             return RESULT:success({ fn = nil })     end
 	end,
 
 	validateCommandWord = function(self, commandWord)
