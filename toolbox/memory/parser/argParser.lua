@@ -11,10 +11,16 @@ return {
 			return RESULT:error("Filters expected on 3rd argument. Instead found " .. args[4])
 		else
 			return RESULT:success { 
-				scripture = STRING_UTIL:join(scripture), 
+				scripture = self:normalizeScripture(scripture), 
 				filter    = STRING_UTIL:join(filter),
 			}
 		end
+	end,
+
+	normalizeScripture = function(self, scriptureArray)
+		local book = scriptureArray[1]
+		if #scriptureArray > 1 then passage = scriptureArray[2] end
+		return { book = book, passage = passage, label = STRING_UTIL:join(scriptureArray) }
 	end,
 
 	getScriptureAndFilter = function(self, args)
