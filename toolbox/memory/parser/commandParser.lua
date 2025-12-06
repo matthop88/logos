@@ -1,5 +1,5 @@
-local CMD_VALIDATOR = require("toolbox/memory/commandValidator")
-local ARG_PARSER    = require("toolbox/memory/argParser")
+local CMD_VALIDATOR = require("toolbox/memory/validation/commandValidator")
+local ARG_PARSER    = require("toolbox/memory/parser/argParser")
 
 local RESULT        = require("toolbox/memory/result")
 
