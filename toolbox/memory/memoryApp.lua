@@ -45,6 +45,24 @@ else
 		end
 	end
 
+	--[[
+	Desired:
+	local navigator = BOOK_NAVIGATOR:create(scripture.book)
+	local chapter   = navigator:findChapter(parsedPassage.start.chapter) 
+	if chapter:isError() then
+		chapter:print()
+	else
+		...
+	end
+
+	1. Even though BOOK_NAVIGATOR:create() returns a result, the method
+	   findChapter() can be called directly. This is because in the case of a
+	   success, the result object will automagically gain the methods of its
+	   data, delegating the calls to them.
+	2. In the case of an error result, these methods will also be created, but they
+	   will just return self.
+	]]
+
 	
 end
 
