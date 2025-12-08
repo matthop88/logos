@@ -10,10 +10,9 @@ local createNavigator = function(bookData)
 
     	findChapter = function(self, chapterNumber, scriptures)
 			for _, c in ipairs(self.data.chapters) do
-				if c.chapter == chapterNumber then
-					return c
-				end
+				if c.chapter == chapterNumber then return RESULT:success(c) end
 			end
+			return RESULT:error("Chapter not found in " .. self:getName() .. ": " .. chapterNumber)
 		end,
 	}
 end
