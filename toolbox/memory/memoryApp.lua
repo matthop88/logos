@@ -17,27 +17,18 @@ else
 	print()
 
 	local parsedPassage = PASSAGE_PARSER:parse(scripture.passage)
-	print("PARSED PASSAGE:")
-	print("  Start:")
-	print("    Chapter: " .. parsedPassage.start.chapter)
-	if parsedPassage.start.verse then
-		print("    Verse: " .. parsedPassage.start.verse)
-	end
-	if parsedPassage.finish then
-		print("  Finish:")
-		print("    Chapter: " .. parsedPassage.finish.chapter)
-		if parsedPassage.finish.verse then
-			print("    Verse: " .. parsedPassage.finish.verse)
-		end
-	end
-
+	
 	local navigator = BOOK_NAVIGATOR:create(scripture.book)
 	local chapter   = navigator:findChapter(parsedPassage.start.chapter)
-	if chapter:isError() then
-		chapter:print()
+	local verse     = chapter:findVerse(parsedPassage.start.verse)
+	
+	if verse:isError() then
+		verse:print()
 	else
-		print("Successfully found chapter " .. parsedPassage.start.chapter)
+		verse:display()
 	end
+
+	
 end
 
 love.event.quit()
