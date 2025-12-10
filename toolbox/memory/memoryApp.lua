@@ -31,18 +31,12 @@ else
 		end
 	end
 
-	local result = BOOK_NAVIGATOR:create(scripture.book)
-	if result:isError() then
-		result:print()
+	local navigator = BOOK_NAVIGATOR:create(scripture.book)
+	local chapter   = navigator:findChapter(parsedPassage.start.chapter)
+	if chapter:isError() then
+		chapter:print()
 	else
-		print("Successfully loaded book: " .. scripture.book)
-		local navigator = result:getData()
-		local chapterResult = navigator:findChapter(parsedPassage.start.chapter)
-		if chapterResult:isError() then
-			chapterResult:print()
-		else
-			print("Successfully found chapter " .. parsedPassage.start.chapter)
-		end
+		print("Successfully found chapter " .. parsedPassage.start.chapter)
 	end
 
 	--[[
@@ -57,8 +51,7 @@ else
 
 	1. Even though BOOK_NAVIGATOR:create() returns a result, the method
 	   findChapter() can be called directly. This is because in the case of a
-	   success, the result object will automagically gain the methods of its
-	   data, delegating the calls to them.
+	   success, the methods of success are added to the data itself.
 	2. In the case of an error result, these methods will also be created, but they
 	   will just return self.
 	]]
