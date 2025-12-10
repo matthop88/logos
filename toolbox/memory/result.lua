@@ -12,6 +12,18 @@ return {
 	end,
 
 	success = function(self, data)
+		if type(data) == "table" then return self:compositeSuccess(data)
+		else                          return self:simpleSuccess(data)  end
+	end,
+
+	compositeSuccess = function(self, data)
+		data.isError = function(self) return false end
+		data.getData = function(self) return self  end
+
+		return data
+	end,
+	
+	simpleSuccess = function(self, data)
 		return {
 			data = data,
 
@@ -19,4 +31,5 @@ return {
 			getData = function(self) return self.data end, 
 		}
 	end,
+
 }
