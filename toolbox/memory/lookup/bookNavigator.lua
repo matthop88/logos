@@ -1,6 +1,14 @@
 local BOOK_LOADER = require("toolbox/memory/lookup/bookLoader")
 local RESULT      = require("toolbox/memory/result")
 
+local enhanceWithNavigatorMethods = function(result)
+	result.getName     = function(self) return self end
+	result.getVersion  = function(self) return self end
+	result.findChapter = function(self, a, b) return self end
+
+	return result
+end
+
 local createNavigator = function(bookData)
 	return {
 		data = bookData,
@@ -20,7 +28,7 @@ end
 return {
 	create = function(self, bookName)
 		local result = BOOK_LOADER:load(bookName)
-		if result:isError() then return result
+		if result:isError() then return enhanceWithNavigatorMethods(result)
 		else                     
 			local bookData = result:getData()
 			return RESULT:success(createNavigator(bookData))
