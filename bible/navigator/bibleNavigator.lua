@@ -43,3 +43,21 @@ Returns:
 }
 
 --]]
+
+local BOOK_QUERY = {
+	book = function(self, bookName)
+		return {
+			bookName = bookName,
+
+			getBookName = function(self)
+				return self.bookName
+			end,
+		}
+	end,
+}
+
+return {
+	query = function(self)
+		return BOOK_QUERY
+	end,
+}
