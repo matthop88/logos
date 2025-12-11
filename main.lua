@@ -6,6 +6,7 @@ end
 
 function love.load(args)
     if     args[1] == "TEST" then require("test/framework")
+    elseif args[1] == "NAVIGATOR" then require("bible/navigator/navigatorMain")
     elseif args[1] == "MEM"  then 
         __COMMAND = args[2]
         __ARGS    = {}
