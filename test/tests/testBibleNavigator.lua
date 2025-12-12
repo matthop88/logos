@@ -33,15 +33,11 @@ return {
                 
         local passageInfo = BIBLE_NAVIGATOR:find(passageInfo)
     
-        return TESTING:assertTrue(name, (
-                #passageInfo.found             == 1
-            and  passageInfo.found[1].book     == "Ephesians"
-            and #passageInfo.found[1].chapters == 1
-            and #passageInfo.found[1].chapters[1].verses == 1
-            and  passageInfo.found[1].chapters[1].verses[1].verse == 3
-            and #passageInfo.found[1].chapters[1].verses[1]       == 2
-            and  passageInfo.found[1].chapters[1].verses[1][1]    == LINE_1
-            and  passageInfo.found[1].chapters[1].verses[1][2]    == LINE_2
-            ))
+        local resultString = "#passageInfo.found                       = " .. #passageInfo.found .. "\n"
+                          .. " passageInfo.found[1].book               = " ..  passageInfo.found[1].book .. "\n"
+                          .. "#passageInfo.found[1].chapters           = " .. #passageInfo.found[1].chapters .. "\n"
+                          .. "#passageInfo.found[1].chapters[1].verses = " .. #passageInfo.found[1].chapters[1].verses
+        
+        return TESTING:assertEquals(name, resultString, "Blah blah blah")
     end,
 }
