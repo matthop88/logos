@@ -1,3 +1,5 @@
+BOOK_FINDER = require("bible/navigator/bookFinder")
+
 --[[
 Given: 
 
@@ -81,15 +83,30 @@ Returns:
 
 return {
 	find = function(self, passageInfo)
-		local results = {}
-		for _, passage in ipairs(passageInfo) do
-			table.insert(results, self:findPassage(passage))
+		local found   = {}
+		local missing = {}
+		
+		for _, p in ipairs(passageInfo) do
+			local f, m = self:findPassage(p)
+			if f ~= nil then table.insert(found, f)   end
+			if m ~= nil then table.insert(missing, m) end
 		end
 
-		return results
+		return { found = found, missing = missing }
 	end,
 
 	findPassage = function(self, passage)
-		return {}
+		local found, missing
+
+		local bookName = passage.book
+		local bookData = BOOK_FINDER:findBook(bookName)
+		
+		if bookData == nil then
+			missing = { book = bookName }
+		else
+			found   = { book = bookName }
+		end
+		
+		return found, missing
 	end,
 }
