@@ -1,4 +1,5 @@
-BOOK_FINDER = require("bible/navigator/bookFinder")
+BOOK_FINDER    = require("bible/navigator/bookFinder")
+CHAPTER_FINDER = require("bible/navigator/chapterFinder")
 
 --[[
 Given: 
@@ -99,7 +100,7 @@ return {
 		local found, missing
 
 		local bookName = passage.book
-		local bookData = BOOK_FINDER:findBook(bookName)
+		local bookData = self:findBook(bookName)
 		
 		if bookData == nil then
 			missing = { book = bookName }
@@ -108,5 +109,9 @@ return {
 		end
 		
 		return found, missing
+	end,
+
+	findBook = function(self, bookName)
+		return BOOK_FINDER:findBook(bookName)
 	end,
 }
