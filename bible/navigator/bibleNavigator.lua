@@ -123,6 +123,12 @@ return {
 	end,
 
 	findChapter = function(self, bookData, chapterNum)
-		return {}
+		local chapterData = CHAPTER_FINDER:findChapter(bookData, chapterNum)
+
+		if chapterData == nil then
+			return { chapter = nil }
+		else
+			return { chapter = chapterNum }
+		end
 	end,
 }
