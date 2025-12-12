@@ -1,40 +1,75 @@
 --[[
-Goal: Can access this in the following way:
+Given: 
 
-BIBLE_NAVIGATOR:query()
-	:book("Ephesians")
-	:chapter(1)
-	:verse(3)
-	:through()
-	:chapter(2)
-	:verse(4)
-	:and()
-	:chapter(3)
-	:verse(1)
-	:through()
-	:verse(2)
-	:fetch()
+local passageInfo = {
+	{	
+		book = "Ephesians",
+		start  = {
+			chapter = 1,
+			verse   = 3,
+		},
+		finish = {
+			chapter = 2,
+			verse   = 4,
+		},
+	},
+	{	
+		book = "Ephesians",
+		start  = {
+			chapter = 3,
+			verse   = 1,
+		},
+		finish = {
+			chapter = 3,
+			verse   = 2,
+		},
+	},
+}
 
-Stage 1: Very simple.
-
-BIBLE_NAVIGATOR:query()
-	:book("Ephesians")
-	:chapter(1)
-	:verse(3)
-	:fetch()
+BIBLE_NAVIGATOR:find(passageInfo)
 
 Returns:
 
 {
 	found = {
-		{
-			book = "Ephesians",
+		{	book = "Ephesians",
 			chapters = {
-				chapter = 1,
-				verses = {
-					verse = 3,
-					"Blessed be the God and Father of our Lord Jesus Christ,",
-                    "who has blessed us with every spiritual blessing in the heavenly places in Christ,",   
+				{	chapter = 1,
+					verses = {
+						{	verse = 3,
+							"Blessed be the God and Father of our Lord Jesus Christ,",
+	                    	"who has blessed us with every spiritual blessing in the heavenly places in Christ,",   
+						},
+						{	verse = 4,
+							...
+						},
+						...,
+					},
+				},
+				{	chapter = 2,
+					verses = {
+						{	verse = 1,
+							...,
+						},
+						...,
+						{	verse = 4,
+							...
+						},
+					},
+				},
+			},
+		},
+		{	book = "Ephesians",
+			chapters = {
+				{	chapter = 3,
+					verses = {
+						{	verse = 1,
+							...,
+						},
+						{	verse = 2,
+							...,
+						},
+					},
 				},
 			},
 		},
@@ -44,20 +79,8 @@ Returns:
 
 --]]
 
-local BOOK_QUERY = {
-	book = function(self, bookName)
-		return {
-			bookName = bookName,
-
-			getBookName = function(self)
-				return self.bookName
-			end,
-		}
-	end,
-}
-
 return {
-	query = function(self)
-		return BOOK_QUERY
+	find = function(self, passageInfo)
+		return nil
 	end,
 }
