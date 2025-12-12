@@ -105,7 +105,7 @@ return {
 		if bookData == nil then
 			missing = { book = bookName }
 		else
-			found   = { book = bookName }
+			found   = self:findChapters(bookName, bookData, passage)
 		end
 		
 		return found, missing
@@ -113,5 +113,16 @@ return {
 
 	findBook = function(self, bookName)
 		return BOOK_FINDER:findBook(bookName)
+	end,
+
+	findChapters = function(self, bookName, bookData, passage)
+		local chapters = {}
+		table.insert(chapters, self:findChapter(bookData, passage.start.chapter))
+
+		return { book = bookName, chapters = chapters }
+	end,
+
+	findChapter = function(self, bookData, chapterNum)
+		return {}
 	end,
 }
