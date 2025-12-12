@@ -81,6 +81,15 @@ Returns:
 
 return {
 	find = function(self, passageInfo)
-		return nil
+		local results = {}
+		for _, passage in ipairs(passageInfo) do
+			table.insert(results, self:findPassage(passage))
+		end
+
+		return results
+	end,
+
+	findPassage = function(self, passage)
+		return {}
 	end,
 }
