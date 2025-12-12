@@ -97,38 +97,46 @@ return {
 	end,
 
 	findPassage = function(self, passage)
-		local found, missing
+		local resultData = self:findPassageIntern(passage)
 
+		if resultData.chapters == nil then
+			return { found = nil, missing = { book = resultData.book }}
+		else
+			return { found = resultData, missing = {} }
+		end
+	end,
+
+	findPassageIntern = function(self, passage)
 		local bookName = passage.book
 		local bookData = self:findBook(bookName)
 		
 		if bookData == nil then
-			missing = { book = bookName }
+			return { book = bookName, chapters = nil }
 		else
-			found   = self:findChapters(bookName, bookData, passage)
+			return { book = bookName, chapters = self:findChapters(bookData, passage) }
 		end
-		
-		return found, missing
 	end,
 
 	findBook = function(self, bookName)
 		return BOOK_FINDER:findBook(bookName)
 	end,
 
-	findChapters = function(self, bookName, bookData, passage)
-		local chapters = {}
-		table.insert(chapters, self:findChapter(bookData, passage.start.chapter))
+	findChapters = function(self, bookData, passage)
+		local chapterNum  = passage.start.chapter
+		local chapterData = self:findChapter(bookData, chapterNum)
 
-		return { book = bookName, chapters = chapters }
+		if chapterData == nil then
+			return nil
+		else 
+			return { chapter = chapterNum, verses = self:findVerses(chapterData, passage) }
+		end
 	end,
 
 	findChapter = function(self, bookData, chapterNum)
-		local chapterData = CHAPTER_FINDER:findChapter(bookData, chapterNum)
+		return CHAPTER_FINDER:findChapter(bookData, chapterNum)
+	end,
 
-		if chapterData == nil then
-			return { chapter = nil }
-		else
-			return { chapter = chapterNum }
-		end
+	findVerses = function(self, chapterData, passage)
+		return nil
 	end,
 }
